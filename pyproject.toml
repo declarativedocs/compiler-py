@@ -3,16 +3,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ddf-pptx"
+name = "declarativedocs"
 version = "0.1.0"
-description = "DDF Presentation Compiler — YAML to PPTX"
+description = "Declarative Document Format (DDF) — YAML to documents compiler"
 readme = "README.md"
 license = "Apache-2.0"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [
     { name = "WeAreBrain", email = "hello@wearebrain.com" },
 ]
-keywords = ["ddf", "pptx", "powerpoint", "yaml", "declarative", "llm"]
+keywords = ["ddf", "declarative", "documents", "pptx", "docx", "pdf", "yaml", "llm"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ddf-pptx = "ddf_pptx.__main__:main"
+ddf = "ddf.__main__:main"
 
 [project.urls]
 Homepage = "https://ddf.dev"

@@ -1,56 +1,43 @@
-# ddf-pptx
+# declarativedocs
 
-Python reference compiler for the [DDF Presentation](https://github.com/declarativedocs/spec) schema. Turns YAML into .pptx files.
+Python reference compiler for the [Declarative Document Format (DDF)](https://ddf.dev). Turns YAML into real documents.
 
-Part of the [Declarative Document Format](https://ddf.dev) project. Created by [WeAreBrain](https://wearebrain.com).
+Created by [WeAreBrain](https://wearebrain.com).
 
 ## Install
 
 ```bash
-pip install ddf-pptx
+pip install declarativedocs
 ```
+
+## Supported formats
+
+| Format | Schema | Status |
+|--------|--------|--------|
+| Presentation (.pptx) | `presentation:` | ✅ Available |
+| Document (.docx) | `document:` | 🔜 Planned |
+| PDF (.pdf) | `pdf:` | 🔜 Planned |
+
+The compiler auto-detects the format from the YAML root key.
 
 ## Usage
 
 ### CLI
 
 ```bash
-ddf-pptx my-deck.yaml                  # → my-deck.pptx
-ddf-pptx my-deck.yaml output.pptx      # → output.pptx
-python -m ddf_pptx my-deck.yaml        # same thing
+ddf my-deck.yaml                    # → my-deck.pptx (auto-detected)
+ddf my-deck.yaml output.pptx        # → explicit output path
 ```
 
 ### Python API
 
 ```python
-from ddf_pptx import compile_yaml
+from ddf import compile
 
-compile_yaml("my-deck.yaml", "output.pptx")
+compile("my-deck.yaml", "output.pptx")
 ```
 
-### From string
-
-```python
-import yaml
-from ddf_pptx.compiler import compile_presentation
-
-spec = yaml.safe_load("""
-presentation:
-  slides:
-    - background: "1E2761"
-      elements:
-        - type: text
-          x: 1  y: 2  w: 8  h: 1.5
-          text: Hello DDF
-          size: 44
-          color: FFFFFF
-          bold: true
-          align: center
-""")
-# compile_presentation(spec["presentation"], "output.pptx")
-```
-
-## Supported elements
+## Element types (Presentation)
 
 | Type | Description |
 |------|-------------|
@@ -64,21 +51,56 @@ presentation:
 
 ## Features
 
-- **Theme variables** — `$primary`, `$heading`, etc.
-- **Slide masters** — Reusable templates with `{{placeholder}}` binding
+- **Theme variables** — Define colors and fonts once, reference with `$name`
+- **Slide masters** — Reusable templates with `{{placeholder}}` data binding
 - **Auto-layout** — `row` and `grid` with configurable gap
 - **Card styling** — Fill, radius, shadow, border on group items
 - **Shadow presets** — `default`, `soft`, `hard`, `glow`, `up`
 - **Bullet lists** — Proper indentation and tight spacing
 - **Icons in cards** — Automatic positioning above text
 
+## Quick example
+
+```yaml
+presentation:
+  layout: "16x9"
+  theme:
+    colors:
+      primary: "1E2761"
+      white: "FFFFFF"
+    fonts:
+      heading: Georgia
+
+  slides:
+    - background: $primary
+      elements:
+        - type: text
+          x: 1  y: 2  w: 8  h: 1.5
+          text: "Hello DDF"
+          font: $heading
+          size: 44
+          color: $white
+          bold: true
+          align: center
+```
+
+```bash
+ddf hello.yaml  # → hello.pptx
+```
+
 ## Schema
 
-See the full [DDF Presentation specification](https://github.com/declarativedocs/spec/blob/main/presentation.v0.1.0.yaml).
+See the full [DDF specification](https://github.com/declarativedocs/spec).
 
 ## Examples
 
 See the [examples/](examples/) directory for complete YAML files.
+
+## Why DDF?
+
+LLMs currently write 800+ lines of imperative library code to produce a 10-slide deck. DDF describes the same deck in ~200 lines of YAML. That's 3-5x fewer tokens, with significantly fewer bugs.
+
+DDF is a declarative spec — the LLM describes *what* it wants, the compiler figures out *how*. The YAML is the contract, the compiler is a swappable implementation detail.
 
 ## License
 
