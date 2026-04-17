@@ -3,7 +3,7 @@ Declarative Document Format (DDF) — Python reference compiler
 https://ddf.dev
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 
 
 def compile(input_path: str, output_path: str | None = None) -> str:

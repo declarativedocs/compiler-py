@@ -4,7 +4,6 @@ DDF Presentation Compiler — YAML to PPTX
 https://ddf.dev · https://github.com/declarativedocs/compiler-py
 
 Part of the Declarative Document Format (DDF) project.
-Created by WeAreBrain — https://wearebrain.com
 SPDX-License-Identifier: Apache-2.0
 """
 

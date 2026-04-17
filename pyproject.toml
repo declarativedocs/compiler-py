@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "declarativedocs"
-version = "0.1.0"
+version = "0.1.2"
 description = "Declarative Document Format (DDF) — YAML to documents compiler"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"
 authors = [
-    { name = "WeAreBrain", email = "hello@wearebrain.com" },
+    { name = "Kjeld Oostra" },
 ]
 keywords = ["ddf", "declarative", "documents", "pptx", "docx", "pdf", "yaml", "llm"]
 classifiers = [
@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ddf = "ddf.__main__:main"
+ddf = "declarativedocs.__main__:main"
 
 [project.urls]
 Homepage = "https://ddf.dev"

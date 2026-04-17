@@ -2,8 +2,6 @@
 
 Python reference compiler for the [Declarative Document Format (DDF)](https://ddf.dev). Turns YAML into real documents.
 
-Created by [WeAreBrain](https://wearebrain.com).
-
 ## Install
 
 ```bash
@@ -32,7 +30,7 @@ ddf my-deck.yaml output.pptx        # → explicit output path
 ### Python API
 
 ```python
-from ddf import compile
+from declarativedocs import compile
 
 compile("my-deck.yaml", "output.pptx")
 ```
